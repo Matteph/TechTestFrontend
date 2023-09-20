@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import AddContractType from "./AddContractType";
+import AddCharge from "./AddCharge";
+
 
 const customAxios = axios.create({
     baseURL: 'http://localhost:8080/api'
@@ -12,11 +15,23 @@ const EmployeesList = () =>{
     const [employees, setEmployees] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [showModal, setShowModal] = useState(false);
-    
-    // const [id, setId] = useState('');
-    // const [name, setName] = useState('');
-    // const [position, setPosition] = useState('');
-    // const [contract, setContract] = useState('');
+    const [showModalCharge, setShowModalCharge] = useState(false);
+
+    const handleClose = (value) => {
+        if(value === 1){
+            setShowModal(false);
+        }else{
+            setShowModalCharge(false);
+        }
+    }
+    const handleShow = (value) =>  {
+        if(value === 1){
+            setShowModal(true);
+        }else{
+            setShowModalCharge(true);
+        }
+    }
+
     const navigate = useNavigate();
 
     useEffect ( ()=>{
@@ -30,10 +45,6 @@ const EmployeesList = () =>{
 
     const goToAddEmployee = () => {
         navigate('/AddEmployee');
-    };
-
-    const goToAddContractType = () => {
-        navigate('/AddContractType');
     };
 
     const filterEmployees = (filterValue) => {
@@ -61,7 +72,8 @@ const EmployeesList = () =>{
             </div>
             <div className="col-12 card">
                 <div className="col-12 bg-white mt-2 p-2 d-flex justify-content-end">
-                    <button className="btn btn-info me-4" onClick={goToAddContractType}>Add Contract Type</button>
+                    <button className="btn btn-secondary me-4" onClick={() => handleShow(2)}>Add Charge</button>
+                    <button className="btn btn-info me-4" onClick={() => handleShow(1)}>Add Contract Type</button>
                     <button className="btn btn-primary" onClick={goToAddEmployee}>Add Employee</button>
                 </div>
                 <div className="col-12 bg-white p-2">
@@ -103,6 +115,8 @@ const EmployeesList = () =>{
                     </tbody>
                 </table>
             </div>
+            <AddContractType showModal={showModal} handleClose={() => handleClose(1)}/>
+            <AddCharge showModal={showModalCharge} handleClose={() => handleClose(2)}/>
         </div>
     );
 }

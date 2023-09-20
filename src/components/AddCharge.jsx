@@ -6,15 +6,15 @@ const customAxios = axios.create({
     baseURL: 'http://localhost:8080/api'
 });
 
-const AddContractType = ({showModal, handleClose}) => {
-    const createContractTypeApi = 'contractType/createContractType';
-    const [contractTypeName, setcontractTypeName] = useState('');
+const AddCharge = ({showModal, handleClose}) => {
+    const createChargeApi = 'charge/createCharge';
+    const [chargeName, setChargeName] = useState('');
     const [sucessPost, setSuccessPost] = useState(false);
     useEffect(() => {
     }, []);
 
     const isFormValid = () => {
-        if(contractTypeName.length>4){
+        if(chargeName.length>4){
             return true;
         }
         return false;
@@ -22,44 +22,45 @@ const AddContractType = ({showModal, handleClose}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const createdContractType = {
-            name: contractTypeName
+        const createdCharge = {
+            name: chargeName
         }
+        console.log(createdCharge);
         try {
-            const createContractType = await customAxios.post(createContractTypeApi, createdContractType);
-            console.log(createContractType);
-            setcontractTypeName('');
+            const createCharge = await customAxios.post(createChargeApi, createdCharge);
+            console.log(createCharge);
+            setChargeName('');
             setSuccessPost(true);
             setTimeout(() => {
                 setSuccessPost(false);
             }, 3000);
           } catch (error) {
-            console.error("Error creating contract Type:", error);
+            console.error("Error creating charge", error);
           }
     };
 
     return (
         <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Create a new Contract Type</Modal.Title>
+                <Modal.Title>Create a new Charge</Modal.Title>
             </Modal.Header>
             <form onSubmit={handleSubmit}>
                 <Modal.Body>
                     <div className='row'>
                         <div className="col-12 px-5 mx-auto">
-                            <label className='mb-1'>New Contract Type</label>
+                            <label className='mb-1'>New Charge</label>
                             <input
                                 className="form-control mb-3"
-                                placeholder="Enter the new contract Type"
+                                placeholder="Enter the new charge"
                                 type="text"
                                 required
-                                value={contractTypeName}
-                                onChange={(e) => setcontractTypeName(e.target.value)}
+                                value={chargeName}
+                                onChange={(e) => setChargeName(e.target.value)}
                             />
                         </div>
                     </div>
                     {sucessPost && <div className="alert alert-success" role="alert">
-                        Contract Type created Succesfully!
+                        Charge created Succesfully!
                     </div>}
                 </Modal.Body>
                 <Modal.Footer>
@@ -68,10 +69,10 @@ const AddContractType = ({showModal, handleClose}) => {
                     </button>
                     {isFormValid() ? (
                         <button className='btn btn-success' type="submit">
-                            Add Contract Type
+                            Add Charge
                         </button>) :
                         (<button className='btn btn-success' type="button" disabled>
-                            Add Contract Type
+                            Add Charge
                         </button>
                         )}
                 </Modal.Footer>
@@ -80,4 +81,4 @@ const AddContractType = ({showModal, handleClose}) => {
     );
 }
 
-export default AddContractType;
+export default AddCharge;

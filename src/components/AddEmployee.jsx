@@ -15,6 +15,7 @@ const AddEmployee = () => {
     const [selectedCharge, setSelectedCharge] = useState(-1);
     const [contractTypes, setContractTypes] = useState([]);
     const [selectedContractType, setSelectedContractType] = useState(-1);
+    const [sucessPost, setSuccessPost] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -60,6 +61,10 @@ const AddEmployee = () => {
             setName('');
             setSelectedCharge(-1);
             setSelectedContractType(-1);
+            setSuccessPost(true);
+            setTimeout(() => {
+                setSuccessPost(false);
+            }, 3000);
             console.log(createEmployeePost);
           } catch (error) {
             console.error("Error creating employee:", error);
@@ -67,7 +72,7 @@ const AddEmployee = () => {
     };
 
     const goBack = () => {
-        navigate('/');
+        navigate(-1);
     };
 
     return (
@@ -76,8 +81,8 @@ const AddEmployee = () => {
                 <button className='btn btn-secondary' onClick={goBack}> {"<Previous"} </button>
             </div>
             <h1 className='text-info text-center mb-4'>Add new Employee</h1>
-            <div className='row'>
-                <div className="col-6 card p-5 mx-auto">
+            <div className='row d-flex justify-content-center mx-auto'>
+                <div className="col-12 col-md-6 card p-5">
                     <form onSubmit={handleSubmit}>
                         <label className='mb-1'>New Employee</label>
                         <input
@@ -106,6 +111,9 @@ const AddEmployee = () => {
                                 <option value={contractType.id} key={contractType.id}> {contractType.name} </option>
                             ))}
                         </select>
+                        {sucessPost && <div className="alert alert-success" role="alert">
+                            Employee created Succesfully!
+                        </div>}
                         <div className='col-12 d-flex justify-content-end'>
                             {isFormValid() ? (
                                 <button className='btn btn-success' type="submit">

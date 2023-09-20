@@ -50,7 +50,7 @@ const AddContractType = ({showModal, handleClose}) => {
                             <label className='mb-1'>New Contract Type</label>
                             <input
                                 className="form-control mb-3"
-                                placeholder="Enter the new contract Type"
+                                placeholder="Enter the new contract type"
                                 type="text"
                                 required
                                 value={contractTypeName}
@@ -63,7 +63,7 @@ const AddContractType = ({showModal, handleClose}) => {
                     </div>}
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className='btn btn-danger' onClick={handleClose}>
+                    <button className='btn btn-danger' type="button" onClick={handleClose}>
                         Close
                     </button>
                     {isFormValid() ? (

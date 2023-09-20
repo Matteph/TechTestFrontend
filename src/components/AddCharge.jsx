@@ -64,7 +64,7 @@ const AddCharge = ({showModal, handleClose}) => {
                     </div>}
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className='btn btn-danger' onClick={handleClose}>
+                    <button className='btn btn-danger' type="button" onClick={handleClose}>
                         Close
                     </button>
                     {isFormValid() ? (

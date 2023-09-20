@@ -80,7 +80,7 @@ const AddEmployee = () => {
             <div className='col-12 mt-5'>
                 <button className='btn btn-secondary' onClick={goBack}> {"<Previous"} </button>
             </div>
-            <h1 className='text-info text-center mb-4'>Add new Employee</h1>
+            <h1 className='text-info text-center mb-4'>Create a new Employee</h1>
             <div className='row d-flex justify-content-center mx-auto'>
                 <div className="col-12 col-md-6 card p-5">
                     <form onSubmit={handleSubmit}>
